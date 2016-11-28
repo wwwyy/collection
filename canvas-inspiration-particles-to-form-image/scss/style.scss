@@ -1,0 +1,157 @@
+$font-standard: "Open Sans", HelveticaNeue, Helvetica, Arial, sans-serif;
+$font-size: 12px;
+$base-color: #333;
+$page-width: 960px;
+$ease-cubic: cubic-bezier(.6,-.8,.6,1.6);
+$during: 0.3s;
+$delay: 0.2s;
+
+@mixin pos-ab($t, $r, $b, $l) {
+	position: absolute;
+	display: block;
+	@if $t != n { top: $t; }
+	@if $r != n { right: $r; }
+	@if $b != n { bottom: $b; }
+	@if $l != n { left: $l; }
+}
+
+@mixin border-radius($tl, $tr:null, $br:null, $bl:null) {
+	@if ($tr and $br and $bl) {
+		border-radius: $tl $tr $br $bl;
+		-moz-border-radius: $tl $tr $br $bl;
+		-webkit-border-radius: $tl $tr $br $bl;
+	} @else {
+		border-radius: $tl;
+		-moz-border-radius: $tl;
+		-webkit-border-radius: $tl;
+	}
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+	@if $inset {
+		-webkit-box-shadow:inset $top $left $blur $color;
+		-moz-box-shadow:inset $top $left $blur $color;
+		box-shadow:inset $top $left $blur $color;
+	} @else {
+		-webkit-box-shadow: $top $left $blur $color;
+		-moz-box-shadow: $top $left $blur $color;
+		box-shadow: $top $left $blur $color;
+	}
+}
+
+@mixin opacity($value: 0.5) {
+	opacity: $value;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" $value * 100 ")";
+	filter: alpha(opacity= $value * 100 );
+	zoom: 1;
+}
+
+@mixin transition($type: all, $duration: 0.3s, $ease: ease, $delay: 0s, $plus: null) {
+	@if $plus != null { 
+		-webkit-transition: $type $duration $ease $delay, $plus;
+		-moz-transition: $type $duration $ease $delay, $plus;
+		-ms-transition: $type $duration $ease $delay, $plus;
+		-o-transition: $type $duration $ease $delay, $plus;
+		transition: $type $duration $ease $delay, $plus;
+	} @else {
+		-webkit-transition: $type $duration $ease $delay;
+		-moz-transition: $type $duration $ease $delay;
+		-ms-transition: $type $duration $ease $delay;
+		-o-transition: $type $duration $ease $delay;
+		transition: $type $duration $ease $delay;
+	}
+}
+
+@mixin keyframes($name) {
+	@-o-keyframes #{$name} { @content };
+	@-moz-keyframes #{$name} {  @content };
+	@-webkit-keyframes #{$name} { @content };
+	@keyframes #{$name} { @content };
+}
+
+@mixin animation($name, $duration: 1s, $ease: linear, $delay: 0s, $repeat: infinite, $plus: null) {
+	@if $plus != null {
+		-webkit-animation: $name $duration $ease $delay $repeat, $plus;
+		-moz-animation: $name $duration $ease $delay $repeat, $plus;
+		-ms-animation: $name $duration $ease $delay $repeat, $plus;
+		-o-animation: $name $duration $ease $delay $repeat, $plus;
+		animation: $name $duration $ease $delay $repeat, $plus;
+	} @else {
+		-webkit-animation: $name $duration $ease $delay $repeat;
+		-moz-animation: $name $duration $ease $delay $repeat;
+		-ms-animation: $name $duration $ease $delay $repeat;
+		-o-animation: $name $duration $ease $delay $repeat;
+		animation: $name $duration $ease $delay $repeat;
+	}
+}
+
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	-o-transform: $transforms;
+	transform: $transforms;
+}
+
+@mixin transform-origin($value: 50% 50%) {
+	-moz-transform-origin: $value;
+	-o-transform-origin: $value;
+	-ms-transform-origin: $value;
+	-webkit-transform-origin: $value;
+	transform-origin: $value;
+}
+
+@mixin font-size($size: 16) {
+	font-size: $size + px;
+	font-size: ($size / 16) * 1rem;
+}
+
+@mixin line-height($size: 16) {
+	line-height: $size + px;
+	line-height: ($size / 16) * 1rem;
+}
+
+@mixin text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin respond-to($media) {
+	@if $media == mobile {
+		/*max-width 640px*/
+		@media only screen and (max-width: 40em) { @content; }
+	}
+	@else if $media == tablet {
+		/*max-width 1024px*/
+		@media only screen and (max-width: 64em) { @content; }
+	}
+	@else if $media == tabletOnly {
+		/*min-width 641px and max-width 1024px*/
+		@media only screen and (min-width: 40.063em) and (max-width: 64em) { @content; }
+	}
+	@else if $media == default {
+		/*min-width 1025px and max-width 1440px*/
+		@media only screen and (min-width: 64.063em) and (max-width: 90em) { @content; }
+	}
+}
+.page-home {
+	position: relative;
+
+	.img-wrapper {
+		@include pos-ab(n, 0, 10%, 0);
+		margin: auto;
+		text-align: center;
+
+		.img {
+			cursor: pointer;
+			opacity: 0.1;
+			@include transition();
+
+			&:hover, &.active {
+				opacity: 1;
+				@include transform(scale(1.1));
+			}
+		}
+	}
+}
