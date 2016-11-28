@@ -1,0 +1,96 @@
+$bgc: #fff;
+$botC: #3D4773;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $bgc;
+  overflow-x: hidden;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 0.8em;
+  color: $botC;
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sliderContainer {
+  position: absolute;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 550px;
+}
+
+.sliderParent {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0.5rem 1rem 3rem rgba(0,0,0,0.4);
+}
+
+.slider {
+  position: absolute;
+  top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 560px;
+  cursor: grab;
+}
+
+.text {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  z-index: 2;
+  font-size: 1.2em;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transform: translateZ(0);
+  line-height: 1.8;
+  &-1 {
+    letter-spacing: 10px;
+    font-size: inherit;
+    text-transform: uppercase;
+  }
+}
+
+.fadeIn {
+  opacity: 1;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.twitLink {
+  width: 35px;
+  height: 27px;
+  transform: translate(6%, 0%);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.dribLink {
+  width: 35px;
+  display: inline-block;
+  transform: translate(5%, -15%); 
+  img {
+    width: 100%;
+    vertical-align: top;
+  }
+}
+
+svg, path, .slider {
+  user-select: none;
+}
