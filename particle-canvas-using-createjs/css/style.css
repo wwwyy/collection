@@ -1,0 +1,30 @@
+body {
+  background: #000;
+  overflow: hidden;
+}
+
+#myCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  cursor: crosshair;
+}
+
+#attention {
+  font-family: 'Source Sans Pro', sans-serif;
+  position: absolute;
+  bottom: 20px;
+  font-size: 32px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  transition: transform 0.75s;
+  transform: translate(0, 60px);
+}
+
+#attention.show {
+  transform: translate(0, 0px);
+}
